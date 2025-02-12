@@ -20,7 +20,8 @@ import com.example.myapplication.ui.viewmodels.VoiceCreateViewModel
 @Composable
 fun VoiceCreateScreen(
     modifier: Modifier = Modifier,
-    viewModel: VoiceCreateViewModel = viewModel()
+    viewModel: VoiceCreateViewModel = viewModel(),
+    showTopBar: Boolean = true
 ) {
     var isRecording by remember { mutableStateOf(false) }
     var showPermissionDialog by remember { mutableStateOf(false) }
@@ -51,17 +52,20 @@ fun VoiceCreateScreen(
     
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Voice Create") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+            if (showTopBar) {
+                TopAppBar(
+                    title = { Text("Voice Create") },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
                 )
-            )
-        }
+            }
+        },
+        modifier = modifier
     ) { paddingValues ->
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
                 .padding(16.dp),

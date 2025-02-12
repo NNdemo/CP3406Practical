@@ -39,7 +39,8 @@ enum class ViewType {
 @Composable
 fun TimelineScreen(
     modifier: Modifier = Modifier,
-    viewModel: TimelineViewModel = viewModel()
+    viewModel: TimelineViewModel = viewModel(),
+    showTopBar: Boolean = true
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -54,22 +55,25 @@ fun TimelineScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Timeline") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                ),
-                actions = {
-                    IconButton(onClick = viewModel::showAddDialog) {
-                        Icon(Icons.Default.Add, contentDescription = "Add Schedule")
+            if (showTopBar) {
+                TopAppBar(
+                    title = { Text("Timeline") },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    ),
+                    actions = {
+                        IconButton(onClick = viewModel::showAddDialog) {
+                            Icon(Icons.Default.Add, contentDescription = "Add Schedule")
+                        }
                     }
-                }
-            )
-        }
+                )
+            }
+        },
+        modifier = modifier
     ) { paddingValues ->
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {

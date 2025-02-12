@@ -22,7 +22,8 @@ import java.time.format.DateTimeFormatter
 @Composable
 fun CalendarScreen(
     modifier: Modifier = Modifier,
-    viewModel: CalendarViewModel = viewModel()
+    viewModel: CalendarViewModel = viewModel(),
+    showTopBar: Boolean = true
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -37,22 +38,25 @@ fun CalendarScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Schedule") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                ),
-                actions = {
-                    IconButton(onClick = viewModel::showAddDialog) {
-                        Icon(Icons.Default.Add, contentDescription = "Add Schedule")
+            if (showTopBar) {
+                TopAppBar(
+                    title = { Text("Schedule") },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    ),
+                    actions = {
+                        IconButton(onClick = viewModel::showAddDialog) {
+                            Icon(Icons.Default.Add, contentDescription = "Add Schedule")
+                        }
                     }
-                }
-            )
-        }
+                )
+            }
+        },
+        modifier = modifier
     ) { paddingValues ->
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
