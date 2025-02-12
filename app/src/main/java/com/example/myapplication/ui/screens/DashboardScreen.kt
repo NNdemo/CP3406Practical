@@ -75,7 +75,7 @@ fun DashboardScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("学习助手") },
+                title = { Text("Study Assistant") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -84,7 +84,7 @@ fun DashboardScreen(
                     IconButton(onClick = viewModel::refreshData) {
                         Icon(
                             imageVector = Icons.Default.Refresh,
-                            contentDescription = "刷新"
+                            contentDescription = "Refresh"
                         )
                     }
                 }
@@ -98,13 +98,13 @@ fun DashboardScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // 今日日期显示
+            // Today's date display
             Text(
-                text = "今日日期: ${LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy年MM月dd日"))}",
+                text = "Today's Date: ${LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))}",
                 style = MaterialTheme.typography.titleMedium
             )
             
-            // 日程概览卡片
+            // Schedule overview card
             ElevatedCard {
                 Column(
                     modifier = Modifier
@@ -117,7 +117,7 @@ fun DashboardScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "今日日程",
+                            text = "Today's Schedule",
                             style = MaterialTheme.typography.titleLarge
                         )
                         Text(
@@ -137,7 +137,7 @@ fun DashboardScreen(
                 }
             }
             
-            // 日程网格视图
+            // Schedule grid view
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 modifier = Modifier.weight(1f),
@@ -153,17 +153,17 @@ fun DashboardScreen(
                 }
             }
             
-            // 快速添加日程按钮
+            // Quick add schedule button
             Button(
                 onClick = viewModel::showAddScheduleDialog,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "添加日程"
+                    contentDescription = "Add Schedule"
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("添加新日程")
+                Text("Add New Schedule")
             }
         }
     }
@@ -225,7 +225,7 @@ private fun ScheduleCard(
                 
                 if (schedule.isReminded) {
                     Text(
-                        text = "已完成",
+                        text = "Completed",
                         style = MaterialTheme.typography.bodySmall,
                         color = Color.White.copy(alpha = 0.9f),
                         modifier = Modifier.padding(start = 8.dp)
@@ -233,7 +233,7 @@ private fun ScheduleCard(
                 }
             }
             
-            // 日期和时间
+            // Date and time
             Text(
                 text = buildTimeRangeText(schedule),
                 style = MaterialTheme.typography.bodySmall,
@@ -263,9 +263,9 @@ private fun buildTimeRangeText(schedule: Schedule): String {
     
     if (schedule.isAllDay) {
         return if (schedule.startTime.toLocalDate() == schedule.endTime.toLocalDate()) {
-            "${schedule.startTime.format(dateFormatter)} 全天"
+            "${schedule.startTime.format(dateFormatter)} All Day"
         } else {
-            "${schedule.startTime.format(dateFormatter)}-${schedule.endTime.format(dateFormatter)} 全天"
+            "${schedule.startTime.format(dateFormatter)}-${schedule.endTime.format(dateFormatter)} All Day"
         }
     }
     

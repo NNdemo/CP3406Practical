@@ -38,14 +38,14 @@ fun CalendarScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("日程安排") },
+                title = { Text("Schedule") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 ),
                 actions = {
                     IconButton(onClick = viewModel::showAddDialog) {
-                        Icon(Icons.Default.Add, contentDescription = "添加日程")
+                        Icon(Icons.Default.Add, contentDescription = "Add Schedule")
                     }
                 }
             )
@@ -102,16 +102,16 @@ private fun DateSelector(
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(onClick = { onDateSelected(selectedDate.minusDays(1)) }) {
-            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "前一天")
+            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous Day")
         }
 
         Text(
-            text = selectedDate.format(DateTimeFormatter.ofPattern("yyyy年MM月dd日")),
+            text = selectedDate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
             style = MaterialTheme.typography.titleLarge
         )
 
         IconButton(onClick = { onDateSelected(selectedDate.plusDays(1)) }) {
-            Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "后一天")
+            Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "Next Day")
         }
     }
 } 

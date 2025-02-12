@@ -22,7 +22,7 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("设置") },
+                title = { Text("Settings") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -66,7 +66,7 @@ fun SettingsScreen(
                     },
                     onValueChange = {},
                     readOnly = true,
-                    label = { Text("默认 AI 模型") },
+                    label = { Text("Default AI Model") },
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -99,7 +99,7 @@ fun SettingsScreen(
                 onClick = { viewModel.saveSettings() },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("保存设置")
+                Text("Save Settings")
             }
         }
     }

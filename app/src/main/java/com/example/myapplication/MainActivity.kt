@@ -52,32 +52,32 @@ class MainActivity : ComponentActivity() {
                             NavigationBarItem(
                                 selected = selectedTab == 0,
                                 onClick = { selectedTab = 0 },
-                                icon = { Icon(Icons.Default.Home, contentDescription = "主页") },
-                                label = { Text("主页") }
+                                icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
+                                label = { Text("Home") }
                             )
                             NavigationBarItem(
                                 selected = selectedTab == 1,
                                 onClick = { selectedTab = 1 },
-                                icon = { Icon(Icons.Default.DateRange, contentDescription = "日程") },
-                                label = { Text("日程") }
+                                icon = { Icon(Icons.Default.DateRange, contentDescription = "Schedule") },
+                                label = { Text("Schedule") }
                             )
                             NavigationBarItem(
                                 selected = selectedTab == 2,
                                 onClick = { selectedTab = 2 },
-                                icon = { Icon(Icons.Default.Timeline, contentDescription = "时间线") },
-                                label = { Text("时间线") }
+                                icon = { Icon(Icons.Default.Timeline, contentDescription = "Timeline") },
+                                label = { Text("Timeline") }
                             )
                             NavigationBarItem(
                                 selected = selectedTab == 3,
                                 onClick = { selectedTab = 3 },
-                                icon = { Icon(Icons.Default.Mic, contentDescription = "语音创建") },
-                                label = { Text("语音") }
+                                icon = { Icon(Icons.Default.Mic, contentDescription = "Voice") },
+                                label = { Text("Voice") }
                             )
                             NavigationBarItem(
                                 selected = selectedTab == 4,
                                 onClick = { selectedTab = 4 },
-                                icon = { Icon(Icons.Default.Settings, contentDescription = "设置") },
-                                label = { Text("设置") }
+                                icon = { Icon(Icons.Default.Settings, contentDescription = "Settings") },
+                                label = { Text("Settings") }
                             )
                         }
                     }

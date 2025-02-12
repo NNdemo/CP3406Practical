@@ -51,7 +51,7 @@ fun ScheduleDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (schedule == null) "添加日程" else "编辑日程") },
+        title = { Text(if (schedule == null) "Add Schedule" else "Edit Schedule") },
         text = {
             Column(
                 modifier = Modifier
@@ -62,14 +62,14 @@ fun ScheduleDialog(
                 OutlinedTextField(
                     value = title,
                     onValueChange = { title = it },
-                    label = { Text("标题") },
+                    label = { Text("Title") },
                     modifier = Modifier.fillMaxWidth()
                 )
 
                 OutlinedTextField(
                     value = description,
                     onValueChange = { description = it },
-                    label = { Text("描述") },
+                    label = { Text("Description") },
                     modifier = Modifier.fillMaxWidth(),
                     minLines = 2
                 )
@@ -77,7 +77,7 @@ fun ScheduleDialog(
                 OutlinedTextField(
                     value = location,
                     onValueChange = { location = it },
-                    label = { Text("地点") },
+                    label = { Text("Location") },
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -85,16 +85,16 @@ fun ScheduleDialog(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text("全天事件")
+                    Text("All Day Event")
                     Switch(
                         checked = isAllDay,
                         onCheckedChange = { isAllDay = it }
                     )
                 }
 
-                // 时间选择
+                // Time selection
                 if (!isAllDay) {
-                    Text("开始时间")
+                    Text("Start Time")
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
@@ -109,7 +109,7 @@ fun ScheduleDialog(
                         )
                     }
                     
-                    Text("结束时间")
+                    Text("End Time")
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
@@ -125,7 +125,7 @@ fun ScheduleDialog(
                     }
                 }
 
-                // 类别选择
+                // Category selection
                 var showCategoryMenu by remember { mutableStateOf(false) }
                 ExposedDropdownMenuBox(
                     expanded = showCategoryMenu,
@@ -135,7 +135,7 @@ fun ScheduleDialog(
                         value = category.name,
                         onValueChange = { },
                         readOnly = true,
-                        label = { Text("类别") },
+                        label = { Text("Category") },
                         modifier = Modifier
                             .fillMaxWidth()
                             .menuAnchor()
@@ -156,7 +156,7 @@ fun ScheduleDialog(
                     }
                 }
 
-                // 优先级选择
+                // Priority selection
                 var showPriorityMenu by remember { mutableStateOf(false) }
                 ExposedDropdownMenuBox(
                     expanded = showPriorityMenu,
@@ -166,7 +166,7 @@ fun ScheduleDialog(
                         value = priority.name,
                         onValueChange = { },
                         readOnly = true,
-                        label = { Text("优先级") },
+                        label = { Text("Priority") },
                         modifier = Modifier
                             .fillMaxWidth()
                             .menuAnchor()
@@ -216,17 +216,17 @@ fun ScheduleDialog(
                     }
                 }
             ) {
-                Text("确定")
+                Text("Confirm")
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("取消")
+                Text("Cancel")
             }
         }
     )
 
-    // 日期选择器
+    // Date picker
     if (showStartDatePicker) {
         val datePickerState = rememberDatePickerState(
             initialSelectedDateMillis = startDate.atStartOfDay()
@@ -248,14 +248,14 @@ fun ScheduleDialog(
                         showStartDatePicker = false
                     }
                 ) {
-                    Text("确定")
+                    Text("OK")
                 }
             }
         ) {
             DatePicker(
                 state = datePickerState,
                 showModeToggle = false,
-                title = { Text("选择开始日期") }
+                title = { Text("Select Start Date") }
             )
         }
     }
@@ -281,19 +281,19 @@ fun ScheduleDialog(
                         showEndDatePicker = false
                     }
                 ) {
-                    Text("确定")
+                    Text("OK")
                 }
             }
         ) {
             DatePicker(
                 state = datePickerState,
                 showModeToggle = false,
-                title = { Text("选择结束日期") }
+                title = { Text("Select End Date") }
             )
         }
     }
 
-    // 时间选择器
+    // Time picker
     if (showStartTimePicker) {
         TimePickerDialog(
             initialHour = startTime.hour,
@@ -331,7 +331,7 @@ fun TimePickerDialog(
 
     AlertDialog(
         onDismissRequest = onDismissRequest,
-        title = { Text("选择时间") },
+        title = { Text("Select Time") },
         text = {
             Column {
                 Row {
@@ -343,7 +343,7 @@ fun TimePickerDialog(
                                 selectedHour = hour
                             }
                         },
-                        label = { Text("小时") },
+                        label = { Text("Hour") },
                         modifier = Modifier.weight(1f)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
@@ -355,7 +355,7 @@ fun TimePickerDialog(
                                 selectedMinute = minute
                             }
                         },
-                        label = { Text("分钟") },
+                        label = { Text("Minute") },
                         modifier = Modifier.weight(1f)
                     )
                 }
@@ -363,12 +363,12 @@ fun TimePickerDialog(
         },
         confirmButton = {
             TextButton(onClick = { onTimeSelected(selectedHour, selectedMinute) }) {
-                Text("确定")
+                Text("OK")
             }
         },
         dismissButton = {
             TextButton(onClick = onDismissRequest) {
-                Text("取消")
+                Text("Cancel")
             }
         }
     )

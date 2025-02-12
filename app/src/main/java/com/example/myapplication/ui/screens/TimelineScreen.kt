@@ -55,14 +55,14 @@ fun TimelineScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("时间线") },
+                title = { Text("Timeline") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 ),
                 actions = {
                     IconButton(onClick = viewModel::showAddDialog) {
-                        Icon(Icons.Default.Add, contentDescription = "添加日程")
+                        Icon(Icons.Default.Add, contentDescription = "Add Schedule")
                     }
                 }
             )
@@ -116,16 +116,16 @@ fun CalendarDateSelector(
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(onClick = { onDateSelected(selectedDate.minusDays(1)) }) {
-            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "前一天")
+            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous Day")
         }
 
         Text(
-            text = selectedDate.format(DateTimeFormatter.ofPattern("yyyy年MM月dd日")),
+            text = selectedDate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
             style = MaterialTheme.typography.titleLarge
         )
 
         IconButton(onClick = { onDateSelected(selectedDate.plusDays(1)) }) {
-            Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "后一天")
+            Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "Next Day")
         }
     }
 }
@@ -148,7 +148,7 @@ fun TimelineView(
         if (crossDaySchedules.isNotEmpty()) {
             item {
                 Text(
-                    text = "跨天日程",
+                    text = "Multi-day Events",
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(vertical = 8.dp)
                 )
@@ -234,7 +234,7 @@ private fun TimelineScheduleCard(
                 )
                 if (schedule.isReminded) {
                     Text(
-                        text = "已完成",
+                        text = "Completed",
                         style = MaterialTheme.typography.labelSmall,
                         color = Color.White.copy(alpha = 0.9f)
                     )
@@ -263,7 +263,7 @@ private fun TimelineScheduleCard(
 }
 
 private fun buildTimeRangeText(schedule: Schedule): String {
-    if (schedule.isAllDay) return "全天"
+    if (schedule.isAllDay) return "All Day"
     
     val startDate = schedule.startTime.toLocalDate()
     val endDate = schedule.endTime.toLocalDate()

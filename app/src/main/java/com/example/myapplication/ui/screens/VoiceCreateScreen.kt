@@ -39,11 +39,11 @@ fun VoiceCreateScreen(
     if (showPermissionDialog) {
         AlertDialog(
             onDismissRequest = { showPermissionDialog = false },
-            title = { Text("需要录音权限") },
-            text = { Text("为了使用语音创建功能，我们需要录音权限。请在设置中开启录音权限。") },
+            title = { Text("Microphone Permission Required") },
+            text = { Text("To use voice creation feature, we need microphone permission. Please enable it in settings.") },
             confirmButton = {
                 TextButton(onClick = { showPermissionDialog = false }) {
-                    Text("确定")
+                    Text("OK")
                 }
             }
         )
@@ -52,7 +52,7 @@ fun VoiceCreateScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("语音创建") },
+                title = { Text("Voice Create") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -68,13 +68,13 @@ fun VoiceCreateScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // 录音状态显示
+            // Recording status display
             Text(
-                text = if (isRecording) "正在录音..." else "点击开始录音",
+                text = if (isRecording) "Recording..." else "Tap to Start Recording",
                 style = MaterialTheme.typography.titleLarge
             )
             
-            // 录音按钮
+            // Recording button
             FilledTonalButton(
                 onClick = {
                     if (isRecording) {
@@ -94,12 +94,12 @@ fun VoiceCreateScreen(
             ) {
                 Icon(
                     imageVector = if (isRecording) Icons.Default.Stop else Icons.Default.Mic,
-                    contentDescription = if (isRecording) "停止录音" else "开始录音",
+                    contentDescription = if (isRecording) "Stop Recording" else "Start Recording",
                     modifier = Modifier.size(48.dp)
                 )
             }
             
-            // 识别结果显示
+            // Recognition result display
             if (viewModel.recognizedText.isNotEmpty()) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
@@ -111,7 +111,7 @@ fun VoiceCreateScreen(
                             .padding(16.dp)
                     ) {
                         Text(
-                            text = "识别结果：",
+                            text = "Recognition Result:",
                             style = MaterialTheme.typography.titleMedium
                         )
                         Spacer(modifier = Modifier.height(8.dp))
@@ -123,13 +123,13 @@ fun VoiceCreateScreen(
                 }
             }
             
-            // 创建按钮
+            // Create button
             if (viewModel.recognizedText.isNotEmpty() && !isRecording) {
                 Button(
                     onClick = { viewModel.createSchedule() },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("创建日程")
+                    Text("Create Schedule")
                 }
             }
         }

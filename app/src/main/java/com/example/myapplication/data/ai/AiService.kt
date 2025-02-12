@@ -79,22 +79,22 @@ class AiService @Inject constructor(
     
     private fun buildPrompt(text: String): String {
         return """
-            请将以下文本解析为日程信息，返回 JSON 格式：
+            Please parse the following text into schedule information, return in JSON format:
             $text
             
-            要求：
-            1. 提取时间信息（开始时间、结束时间）
-            2. 识别事件类型（STUDY/EXAM/HOMEWORK/MEETING/CLASS/OTHER）
-            3. 识别地点信息（如果有）
-            4. 判断优先级（HIGH/MEDIUM/LOW）
+            Requirements:
+            1. Extract time information (start time, end time)
+            2. Identify event type (STUDY/EXAM/HOMEWORK/MEETING/CLASS/OTHER)
+            3. Identify location information (if any)
+            4. Determine priority (HIGH/MEDIUM/LOW)
             
-            JSON 格式示例：
+            JSON format example:
             {
-                "title": "数学考试",
+                "title": "Math Exam",
                 "startTime": "2024-03-20 14:00",
                 "endTime": "2024-03-20 16:00",
                 "category": "EXAM",
-                "location": "教学楼301",
+                "location": "Building 301",
                 "priority": "HIGH"
             }
         """.trimIndent()

@@ -63,7 +63,7 @@ fun CalendarView(
             if (crossDaySchedules.isNotEmpty()) {
                 item {
                     Text(
-                        text = "跨天日程",
+                        text = "Multi-day Events",
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.padding(start = 16.dp, bottom = 8.dp)
@@ -277,7 +277,7 @@ private fun ScheduleListItem(
 }
 
 private fun buildTimeRangeText(schedule: Schedule, showFullDate: Boolean, selectedDate: LocalDate = schedule.startTime.toLocalDate()): String {
-    if (schedule.isAllDay) return "全天"
+    if (schedule.isAllDay) return "All Day"
     
     val startDate = schedule.startTime.toLocalDate()
     val endDate = schedule.endTime.toLocalDate()
@@ -321,7 +321,7 @@ private fun WeekHeader(
     ) {
         // 显示周数
         Text(
-            text = "第${selectedDate.get(java.time.temporal.WeekFields.ISO.weekOfWeekBasedYear())}周",
+            text = "Week",
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 4.dp),
@@ -348,14 +348,14 @@ private fun WeekHeader(
                     // 星期几
                     Text(
                         text = when(date.dayOfWeek) {
-                            java.time.DayOfWeek.MONDAY -> "周一"
-                            java.time.DayOfWeek.TUESDAY -> "周二"
-                            java.time.DayOfWeek.WEDNESDAY -> "周三"
-                            java.time.DayOfWeek.THURSDAY -> "周四"
-                            java.time.DayOfWeek.FRIDAY -> "周五"
-                            java.time.DayOfWeek.SATURDAY -> "周六"
-                            java.time.DayOfWeek.SUNDAY -> "周日"
-                            null -> "未知"
+                            java.time.DayOfWeek.MONDAY -> "MON"
+                            java.time.DayOfWeek.TUESDAY -> "TUE"
+                            java.time.DayOfWeek.WEDNESDAY -> "WED"
+                            java.time.DayOfWeek.THURSDAY -> "THU"
+                            java.time.DayOfWeek.FRIDAY -> "FRI"
+                            java.time.DayOfWeek.SATURDAY -> "SAT"
+                            java.time.DayOfWeek.SUNDAY -> "SUN"
+                            null -> "UNK"
                         },
                         color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
