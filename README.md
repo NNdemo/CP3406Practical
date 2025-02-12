@@ -12,15 +12,22 @@ she maintains a healthy balance between studying, working, and enjoying her soci
 # Study Assistant - Mobile Application Presentation
 
 ## 0. Run the app
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <img src="./assets/Screenshot_20250212_171409.png" width="30%" />
+    <img src="./assets/Screenshot_20250212_171359.png" width="30%" />
+    <img src="./assets/Screenshot_20250212_171349.png" width="30%" />
+</div>
 
-![Screenshot_20250212_171409](./assets/Screenshot_20250212_171409.png)
-![Screenshot_20250212_171359](./assets/Screenshot_20250212_171359.png)
-![Screenshot_20250212_171349](./assets/Screenshot_20250212_171349.png)
-![Screenshot_20250212_170739](./assets/Screenshot_20250212_170739.png)
-![Screenshot_20250212_170729](./assets/Screenshot_20250212_170729.png)
-![Screenshot_20250212_170721](./assets/Screenshot_20250212_170721.png)
-![Screenshot_20250212_170705](./assets/Screenshot_20250212_170705.png)
-![Screenshot_20250212_170648](./assets/Screenshot_20250212_170648.png)
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <img src="./assets/Screenshot_20250212_170739.png" width="30%" />
+    <img src="./assets/Screenshot_20250212_170729.png" width="30%" />
+    <img src="./assets/Screenshot_20250212_170721.png" width="30%" />
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <img src="./assets/Screenshot_20250212_170705.png" width="30%" />
+    <img src="./assets/Screenshot_20250212_170648.png" width="30%" />
+</div>
 
 ## 1. Problem Statement
 
