@@ -11,6 +11,17 @@ she maintains a healthy balance between studying, working, and enjoying her soci
 
 # Study Assistant - Mobile Application Presentation
 
+## 0. Run the app
+
+![Screenshot_20250212_171409](./assets/Screenshot_20250212_171409.png)
+![Screenshot_20250212_171359](./assets/Screenshot_20250212_171359.png)
+![Screenshot_20250212_171349](./assets/Screenshot_20250212_171349.png)
+![Screenshot_20250212_170739](./assets/Screenshot_20250212_170739.png)
+![Screenshot_20250212_170729](./assets/Screenshot_20250212_170729.png)
+![Screenshot_20250212_170721](./assets/Screenshot_20250212_170721.png)
+![Screenshot_20250212_170705](./assets/Screenshot_20250212_170705.png)
+![Screenshot_20250212_170648](./assets/Screenshot_20250212_170648.png)
+
 ## 1. Problem Statement
 
 ### 1.1 Inefficient Time Management
