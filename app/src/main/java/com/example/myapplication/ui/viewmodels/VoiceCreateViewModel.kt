@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.media.MediaRecorder
 import android.os.Build
 import android.Manifest
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -38,6 +39,7 @@ class VoiceCreateViewModel @Inject constructor(
         ) == PackageManager.PERMISSION_GRANTED
     }
     
+    @RequiresApi(Build.VERSION_CODES.S)
     fun startRecording() {
         if (!hasRecordPermission()) return
         
