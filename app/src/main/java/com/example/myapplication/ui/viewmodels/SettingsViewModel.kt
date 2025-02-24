@@ -12,13 +12,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 enum class AiModel {
-    DEEPSEEK, CHATGPT
+//    DEEPSEEK,
+    CHATGPT
 }
 
 data class SettingsUiState(
-    val deepseekApiKey: String = "",
+//    val deepseekApiKey: String = "",
     val chatgptApiKey: String = "",
-    val defaultAiModel: AiModel = AiModel.DEEPSEEK
+    val defaultAiModel: AiModel = AiModel.CHATGPT
 )
 
 @HiltViewModel
@@ -38,7 +39,7 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             appSettings.settingsFlow.collect { settings ->
                 _uiState.value = SettingsUiState(
-                    deepseekApiKey = settings.deepseekApiKey,
+//                    deepseekApiKey = settings.deepseekApiKey,
                     chatgptApiKey = settings.chatgptApiKey,
                     defaultAiModel = settings.defaultAiModel
                 )
@@ -46,9 +47,9 @@ class SettingsViewModel @Inject constructor(
         }
     }
     
-    fun updateDeepseekApiKey(apiKey: String) {
-        _uiState.value = _uiState.value.copy(deepseekApiKey = apiKey)
-    }
+//    fun updateDeepseekApiKey(apiKey: String) {
+//        _uiState.value = _uiState.value.copy(deepseekApiKey = apiKey)
+//    }
     
     fun updateChatgptApiKey(apiKey: String) {
         _uiState.value = _uiState.value.copy(chatgptApiKey = apiKey)
@@ -61,7 +62,7 @@ class SettingsViewModel @Inject constructor(
     fun saveSettings() {
         viewModelScope.launch {
             with(_uiState.value) {
-                appSettings.updateDeepseekApiKey(deepseekApiKey)
+//                appSettings.updateDeepseekApiKey(deepseekApiKey)
                 appSettings.updateChatgptApiKey(chatgptApiKey)
                 appSettings.updateDefaultAiModel(defaultAiModel)
             }

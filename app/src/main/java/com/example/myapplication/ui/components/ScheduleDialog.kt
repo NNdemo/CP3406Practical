@@ -40,7 +40,7 @@ fun ScheduleDialog(
     var endTime by remember { mutableStateOf(schedule?.endTime?.toLocalTime() ?: LocalTime.now().plusHours(1)) }
     var isAllDay by remember { mutableStateOf(schedule?.isAllDay ?: false) }
     var category by remember { mutableStateOf(schedule?.category ?: ScheduleCategory.OTHER) }
-    var reminderTime by remember { mutableStateOf(schedule?.reminderTime) }
+    val reminderTime by remember { mutableStateOf(schedule?.reminderTime) }
     var location by remember { mutableStateOf(schedule?.location ?: "") }
     var priority by remember { mutableStateOf(schedule?.priority ?: SchedulePriority.MEDIUM) }
     

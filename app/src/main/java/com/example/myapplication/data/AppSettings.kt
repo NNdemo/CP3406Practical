@@ -19,23 +19,23 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class AppSettings @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
-    private val deepseekApiKey = stringPreferencesKey("deepseek_api_key")
+//    private val deepseekApiKey = stringPreferencesKey("deepseek_api_key")
     private val chatgptApiKey = stringPreferencesKey("chatgpt_api_key")
     private val defaultAiModel = stringPreferencesKey("default_ai_model")
 
     val settingsFlow: Flow<Settings> = context.dataStore.data.map { preferences ->
         Settings(
-            deepseekApiKey = preferences[deepseekApiKey] ?: "",
+//            deepseekApiKey = preferences[deepseekApiKey] ?: "",
             chatgptApiKey = preferences[chatgptApiKey] ?: "",
-            defaultAiModel = preferences[defaultAiModel]?.let { AiModel.valueOf(it) } ?: AiModel.DEEPSEEK
+            defaultAiModel = preferences[defaultAiModel]?.let { AiModel.valueOf(it) } ?: AiModel.CHATGPT
         )
     }
 
-    suspend fun updateDeepseekApiKey(apiKey: String) {
-        context.dataStore.edit { preferences ->
-            preferences[deepseekApiKey] = apiKey
-        }
-    }
+//    suspend fun updateDeepseekApiKey(apiKey: String) {
+//        context.dataStore.edit { preferences ->
+//            preferences[deepseekApiKey] = apiKey
+//        }
+//    }
 
     suspend fun updateChatgptApiKey(apiKey: String) {
         context.dataStore.edit { preferences ->
@@ -50,7 +50,7 @@ class AppSettings @Inject constructor(
     }
 
     data class Settings(
-        val deepseekApiKey: String,
+//        val deepseekApiKey: String,
         val chatgptApiKey: String,
         val defaultAiModel: AiModel
     )

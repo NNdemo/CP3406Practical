@@ -22,7 +22,7 @@ class AiService @Inject constructor(
     private val gson: Gson
 ) {
     companion object {
-        private const val DEEPSEEK_MODEL = "deepseek-chat"
+//        private const val DEEPSEEK_MODEL = "deepseek-chat"
         private const val CHATGPT_MODEL = "gpt-3.5-turbo"
     }
 
@@ -30,31 +30,31 @@ class AiService @Inject constructor(
         val settings = appSettings.settingsFlow.first()
         
         return@withContext when (settings.defaultAiModel) {
-            AiModel.DEEPSEEK -> parseWithDeepseek(text, settings.deepseekApiKey)
+//            AiModel.DEEPSEEK -> parseWithDeepseek(text, settings.deepseekApiKey)
             AiModel.CHATGPT -> parseWithChatGPT(text, settings.chatgptApiKey)
         }
     }
     
-    private suspend fun parseWithDeepseek(text: String, apiKey: String): Schedule? {
-        if (apiKey.isEmpty()) return null
-        
-        try {
-            val prompt = buildPrompt(text)
-            val request = ChatRequest(
-                model = DEEPSEEK_MODEL,
-                messages = listOf(Message("user", prompt))
-            )
-            
-            val response = deepSeekApiService.chat("Bearer $apiKey", request)
-            if (!response.isSuccessful) return null
-            
-            val result = response.body()?.choices?.firstOrNull()?.message?.content
-            return result?.let { parseResponse(it) }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return null
-        }
-    }
+//    private suspend fun parseWithDeepseek(text: String, apiKey: String): Schedule? {
+//        if (apiKey.isEmpty()) return null
+//
+//        try {
+//            val prompt = buildPrompt(text)
+//            val request = ChatRequest(
+//                model = DEEPSEEK_MODEL,
+//                messages = listOf(Message("user", prompt))
+//            )
+//
+//            val response = deepSeekApiService.chat("Bearer $apiKey", request)
+//            if (!response.isSuccessful) return null
+//
+//            val result = response.body()?.choices?.firstOrNull()?.message?.content
+//            return result?.let { parseResponse(it) }
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//            return null
+//        }
+//    }
     
     private suspend fun parseWithChatGPT(text: String, apiKey: String): Schedule? {
         if (apiKey.isEmpty()) return null

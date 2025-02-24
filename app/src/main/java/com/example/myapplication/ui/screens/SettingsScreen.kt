@@ -42,12 +42,12 @@ fun SettingsScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             // DeepSeek API Key
-            OutlinedTextField(
-                value = uiState.deepseekApiKey,
-                onValueChange = { viewModel.updateDeepseekApiKey(it) },
-                label = { Text("DeepSeek API Key") },
-                modifier = Modifier.fillMaxWidth()
-            )
+//            OutlinedTextField(
+//                value = uiState.deepseekApiKey,
+//                onValueChange = { viewModel.updateDeepseekApiKey(it) },
+//                label = { Text("DeepSeek API Key") },
+//                modifier = Modifier.fillMaxWidth()
+//            )
             
             // ChatGPT API Key
             OutlinedTextField(
@@ -65,7 +65,7 @@ fun SettingsScreen(
             ) {
                 OutlinedTextField(
                     value = when (uiState.defaultAiModel) {
-                        AiModel.DEEPSEEK -> "DeepSeek"
+//                        AiModel.DEEPSEEK -> "DeepSeek"
                         AiModel.CHATGPT -> "ChatGPT"
                     },
                     onValueChange = {},
@@ -81,13 +81,13 @@ fun SettingsScreen(
                     expanded = expanded,
                     onDismissRequest = { expanded = false }
                 ) {
-                    DropdownMenuItem(
-                        text = { Text("DeepSeek") },
-                        onClick = {
-                            viewModel.updateDefaultAiModel(AiModel.DEEPSEEK)
-                            expanded = false
-                        }
-                    )
+//                    DropdownMenuItem(
+//                        text = { Text("DeepSeek") },
+//                        onClick = {
+//                            viewModel.updateDefaultAiModel(AiModel.DEEPSEEK)
+//                            expanded = false
+//                        }
+//                    )
                     DropdownMenuItem(
                         text = { Text("ChatGPT") },
                         onClick = {
