@@ -91,8 +91,8 @@ class AiService @Inject constructor(
             JSON format example:
             {
                 "title": "Math Exam",
-                "startTime": "2024-03-20 14:00",
-                "endTime": "2024-03-20 16:00",
+                "startTime": "2025-03-20 14:00",
+                "endTime": "2025-03-20 16:00",
                 "category": "EXAM",
                 "location": "Building 301",
                 "priority": "HIGH"
