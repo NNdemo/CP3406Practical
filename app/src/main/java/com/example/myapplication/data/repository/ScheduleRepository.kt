@@ -37,6 +37,7 @@ class ScheduleRepository @Inject constructor(
         repeatInterval: Int = 0,
         repeatUntil: LocalDateTime? = null
     ): Long {
+        println("Repository: 创建日程 - 标题=\"$title\", 开始时间=$startTime, 结束时间=$endTime, 地点=$location")
         val schedule = Schedule(
             title = title,
             startTime = startTime,
@@ -51,7 +52,9 @@ class ScheduleRepository @Inject constructor(
             repeatInterval = repeatInterval,
             repeatUntil = repeatUntil
         )
-        return scheduleDao.insert(schedule)
+        val id = scheduleDao.insert(schedule)
+        println("Repository: 日程已保存到数据库，ID=$id")
+        return id
     }
 
     suspend fun updateSchedule(schedule: Schedule) = scheduleDao.update(schedule)

@@ -27,6 +27,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Timeline
+import androidx.compose.material.icons.filled.TextSnippet
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -34,7 +35,7 @@ import com.example.myapplication.ui.screens.CalendarScreen
 import com.example.myapplication.ui.screens.DashboardScreen
 import com.example.myapplication.ui.screens.SettingsScreen
 import com.example.myapplication.ui.screens.TimelineScreen
-import com.example.myapplication.ui.screens.VoiceCreateScreen
+import com.example.myapplication.ui.screens.TextCreateScreen
 import com.example.myapplication.ui.theme.MyApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
@@ -42,6 +43,11 @@ import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.myapplication.ui.viewmodels.DashboardViewModel
+import com.example.myapplication.ui.viewmodels.CalendarViewModel
+import com.example.myapplication.ui.viewmodels.ScheduleViewModel
+import com.example.myapplication.ui.viewmodels.SettingsViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -97,8 +103,8 @@ fun AdaptiveLayout(
                 NavigationRailItem(
                     selected = selectedTab == 3,
                     onClick = { onTabSelected(3) },
-                    icon = { Icon(Icons.Default.Mic, contentDescription = "Voice") },
-                    label = { Text("Voice") }
+                    icon = { Icon(Icons.Default.TextSnippet, contentDescription = "Text") },
+                    label = { Text("Text") }
                 )
                 NavigationRailItem(
                     selected = selectedTab == 4,
@@ -135,8 +141,8 @@ fun AdaptiveLayout(
                         NavigationBarItem(
                             selected = selectedTab == 3,
                             onClick = { onTabSelected(3) },
-                            icon = { Icon(Icons.Default.Mic, contentDescription = "Voice") },
-                            label = { Text("Voice") }
+                            icon = { Icon(Icons.Default.TextSnippet, contentDescription = "Text") },
+                            label = { Text("Text") }
                         )
                         NavigationBarItem(
                             selected = selectedTab == 4,
@@ -155,11 +161,23 @@ fun AdaptiveLayout(
                 color = MaterialTheme.colorScheme.background
             ) {
                 when (selectedTab) {
-                    0 -> DashboardScreen(showTopBar = showTopBar)
-                    1 -> CalendarScreen(showTopBar = showTopBar)
+                    0 -> DashboardScreen(
+                        viewModel = viewModel<DashboardViewModel>()
+                    )
+                    1 -> CalendarScreen(
+                        viewModel = viewModel<CalendarViewModel>()
+                    )
                     2 -> TimelineScreen(showTopBar = showTopBar)
-                    3 -> VoiceCreateScreen(showTopBar = showTopBar)
-                    4 -> SettingsScreen(showTopBar = showTopBar)
+                    3 -> TextCreateScreen(
+                        onBackClick = {
+                            // 切换回主屏幕
+                            onTabSelected(0)
+                        },
+                        scheduleViewModel = viewModel<ScheduleViewModel>()
+                    )
+                    4 -> SettingsScreen(
+                        viewModel = viewModel<SettingsViewModel>()
+                    )
                 }
             }
         }

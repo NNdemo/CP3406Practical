@@ -24,11 +24,21 @@ interface ChatGPTApiService {
     ): Response<ChatResponse>
 }
 
+interface GrokApiService {
+    @Headers("Content-Type: application/json")
+    @POST("v1/chat/completions")
+    suspend fun chat(
+        @Header("Authorization") apiKey: String,
+        @Body request: ChatRequest
+    ): Response<ChatResponse>
+}
+
 data class ChatRequest(
     val model: String,
     val messages: List<Message>,
     val temperature: Double = 0.7,
-    val max_tokens: Int = 1000
+    val max_tokens: Int = 1000,
+    val stream: Boolean = false
 )
 
 data class Message(
@@ -50,7 +60,10 @@ data class ScheduleParseResult(
     val title: String,
     val startTime: String,
     val endTime: String,
+    val description: String?,
     val category: String,
+    val isAllDay: Boolean?,
+    val reminderTime: String?,
     val location: String?,
     val priority: String
 ) 

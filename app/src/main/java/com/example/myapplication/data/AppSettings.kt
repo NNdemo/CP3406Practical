@@ -21,12 +21,14 @@ class AppSettings @Inject constructor(
 ) {
 //    private val deepseekApiKey = stringPreferencesKey("deepseek_api_key")
     private val chatgptApiKey = stringPreferencesKey("chatgpt_api_key")
+    private val grokApiKey = stringPreferencesKey("grok_api_key")
     private val defaultAiModel = stringPreferencesKey("default_ai_model")
 
     val settingsFlow: Flow<Settings> = context.dataStore.data.map { preferences ->
         Settings(
 //            deepseekApiKey = preferences[deepseekApiKey] ?: "",
             chatgptApiKey = preferences[chatgptApiKey] ?: "",
+            grokApiKey = preferences[grokApiKey] ?: "",
             defaultAiModel = preferences[defaultAiModel]?.let { AiModel.valueOf(it) } ?: AiModel.CHATGPT
         )
     }
@@ -43,6 +45,12 @@ class AppSettings @Inject constructor(
         }
     }
 
+    suspend fun updateGrokApiKey(apiKey: String) {
+        context.dataStore.edit { preferences ->
+            preferences[grokApiKey] = apiKey
+        }
+    }
+
     suspend fun updateDefaultAiModel(model: AiModel) {
         context.dataStore.edit { preferences ->
             preferences[defaultAiModel] = model.name
@@ -52,6 +60,7 @@ class AppSettings @Inject constructor(
     data class Settings(
 //        val deepseekApiKey: String,
         val chatgptApiKey: String,
+        val grokApiKey: String,
         val defaultAiModel: AiModel
     )
 } 

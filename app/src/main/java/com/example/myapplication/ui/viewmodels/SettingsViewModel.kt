@@ -13,12 +13,14 @@ import javax.inject.Inject
 
 enum class AiModel {
 //    DEEPSEEK,
-    CHATGPT
+    CHATGPT,
+    GROK
 }
 
 data class SettingsUiState(
 //    val deepseekApiKey: String = "",
     val chatgptApiKey: String = "",
+    val grokApiKey: String = "",
     val defaultAiModel: AiModel = AiModel.CHATGPT
 )
 
@@ -41,6 +43,7 @@ class SettingsViewModel @Inject constructor(
                 _uiState.value = SettingsUiState(
 //                    deepseekApiKey = settings.deepseekApiKey,
                     chatgptApiKey = settings.chatgptApiKey,
+                    grokApiKey = settings.grokApiKey,
                     defaultAiModel = settings.defaultAiModel
                 )
             }
@@ -55,6 +58,10 @@ class SettingsViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(chatgptApiKey = apiKey)
     }
     
+    fun updateGrokApiKey(apiKey: String) {
+        _uiState.value = _uiState.value.copy(grokApiKey = apiKey)
+    }
+    
     fun updateDefaultAiModel(model: AiModel) {
         _uiState.value = _uiState.value.copy(defaultAiModel = model)
     }
@@ -64,6 +71,7 @@ class SettingsViewModel @Inject constructor(
             with(_uiState.value) {
 //                appSettings.updateDeepseekApiKey(deepseekApiKey)
                 appSettings.updateChatgptApiKey(chatgptApiKey)
+                appSettings.updateGrokApiKey(grokApiKey)
                 appSettings.updateDefaultAiModel(defaultAiModel)
             }
         }

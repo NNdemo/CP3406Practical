@@ -2,6 +2,7 @@ package com.example.myapplication.di
 
 import com.example.myapplication.data.ai.ChatGPTApiService
 import com.example.myapplication.data.ai.DeepSeekApiService
+import com.example.myapplication.data.ai.GrokApiService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -35,9 +36,9 @@ object NetworkModule {
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS)
             .build()
     }
     
@@ -65,6 +66,17 @@ object NetworkModule {
     
     @Provides
     @Singleton
+    @Named("grok")
+    fun provideGrokRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://api.x.ai/")
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+    }
+    
+    @Provides
+    @Singleton
     fun provideDeepSeekApiService(@Named("deepseek") retrofit: Retrofit): DeepSeekApiService {
         return retrofit.create(DeepSeekApiService::class.java)
     }
@@ -73,5 +85,11 @@ object NetworkModule {
     @Singleton
     fun provideChatGPTApiService(@Named("chatgpt") retrofit: Retrofit): ChatGPTApiService {
         return retrofit.create(ChatGPTApiService::class.java)
+    }
+    
+    @Provides
+    @Singleton
+    fun provideGrokApiService(@Named("grok") retrofit: Retrofit): GrokApiService {
+        return retrofit.create(GrokApiService::class.java)
     }
 } 

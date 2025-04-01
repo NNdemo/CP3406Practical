@@ -55,6 +55,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.transport.api)
     val roomVersion = "2.6.1"
     val hiltVersion = rootProject.extra["hilt_version"].toString()
 
