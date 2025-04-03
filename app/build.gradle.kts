@@ -122,4 +122,5 @@ dependencies {
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 
     implementation(libs.androidx.material3.window)
+    implementation("org.jsoup:jsoup")
 }
