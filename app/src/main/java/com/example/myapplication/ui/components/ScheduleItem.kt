@@ -56,7 +56,7 @@ fun ScheduleItem(
             if (schedule.location.isNotEmpty()) {
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = "地点: ${schedule.location}",
+                    text = "Location: ${schedule.location}",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -65,7 +65,7 @@ fun ScheduleItem(
             // 类别和优先级
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "类别: ${schedule.category} • 优先级: ${schedule.priority}",
+                text = "Category: ${schedule.category} • Priority: ${schedule.priority}",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -96,7 +96,7 @@ fun ScheduleItem(
                 ) {
                     Icon(
                         imageVector = Icons.Default.CheckCircle,
-                        contentDescription = "接受",
+                        contentDescription = "Accept",
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
@@ -107,7 +107,7 @@ fun ScheduleItem(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Close,
-                        contentDescription = "拒绝",
+                        contentDescription = "Reject",
                         tint = MaterialTheme.colorScheme.error
                     )
                 }

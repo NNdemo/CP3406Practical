@@ -31,7 +31,7 @@ fun SettingsScreen(
         topBar = {
             if (showTopBar) {
                 TopAppBar(
-                    title = { Text("设置") },
+                    title = { Text("Settings") },
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
                         titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -71,7 +71,7 @@ fun SettingsScreen(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "JCU 课程管理",
+                            text = "JCU Course Management",
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
@@ -80,7 +80,7 @@ fun SettingsScreen(
                     Spacer(modifier = Modifier.height(8.dp))
                     
                     Text(
-                        text = "管理您的JCU课程，导入课程到日程表，查看课程统计信息。",
+                        text = "Manage your JCU courses, import courses to schedule, view course statistics.",
                         color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 }
@@ -103,12 +103,12 @@ fun SettingsScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Info,
-                            contentDescription = "信息",
+                            contentDescription = "Information",
                             tint = MaterialTheme.colorScheme.onSecondaryContainer
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "API 使用建议",
+                            text = "API Usage Recommendations",
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSecondaryContainer
                         )
@@ -117,7 +117,7 @@ fun SettingsScreen(
                     Spacer(modifier = Modifier.height(8.dp))
                     
                     Text(
-                        text = "我们建议首先配置并使用ChatGPT API，因为它更稳定。Grok API仍处于测试阶段，可能会出现不稳定现象。",
+                        text = "We recommend configuring and using the ChatGPT API first as it is more stable. The Grok API is still in testing phase and may experience instability.",
                         color = MaterialTheme.colorScheme.onSecondaryContainer
                     )
                 }
@@ -127,7 +127,7 @@ fun SettingsScreen(
             OutlinedTextField(
                 value = uiState.chatgptApiKey,
                 onValueChange = { viewModel.updateChatgptApiKey(it) },
-                label = { Text("ChatGPT API 密钥") },
+                label = { Text("ChatGPT API Key") },
                 modifier = Modifier.fillMaxWidth()
             )
             
@@ -135,8 +135,8 @@ fun SettingsScreen(
             OutlinedTextField(
                 value = uiState.grokApiKey,
                 onValueChange = { viewModel.updateGrokApiKey(it) },
-                label = { Text("Grok API 密钥 (X.AI)") },
-                placeholder = { Text("格式: xai-xxxxxxxxxxxx") },
+                label = { Text("Grok API Key (X.AI)") },
+                placeholder = { Text("Format: xai-xxxxxxxxxxxx") },
                 modifier = Modifier.fillMaxWidth()
             )
             
@@ -149,12 +149,12 @@ fun SettingsScreen(
                 OutlinedTextField(
                     value = when (uiState.defaultAiModel) {
 //                        AiModel.DEEPSEEK -> "DeepSeek"
-                        AiModel.CHATGPT -> "ChatGPT (推荐)"
-                        AiModel.GROK -> "Grok (X.AI) - 测试版"
+                        AiModel.CHATGPT -> "ChatGPT (Recommended)"
+                        AiModel.GROK -> "Grok (X.AI) - Beta"
                     },
                     onValueChange = {},
                     readOnly = true,
-                    label = { Text("默认 AI 模型") },
+                    label = { Text("Default AI Model") },
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -173,14 +173,14 @@ fun SettingsScreen(
 //                        }
 //                    )
                     DropdownMenuItem(
-                        text = { Text("ChatGPT (推荐)") },
+                        text = { Text("ChatGPT (Recommended)") },
                         onClick = {
                             viewModel.updateDefaultAiModel(AiModel.CHATGPT)
                             expanded = false
                         }
                     )
                     DropdownMenuItem(
-                        text = { Text("Grok (X.AI) - 测试版") },
+                        text = { Text("Grok (X.AI) - Beta") },
                         onClick = {
                             viewModel.updateDefaultAiModel(AiModel.GROK)
                             expanded = false
@@ -194,7 +194,7 @@ fun SettingsScreen(
                 onClick = { viewModel.saveSettings() },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("保存设置")
+                Text("Save Settings")
             }
         }
     }

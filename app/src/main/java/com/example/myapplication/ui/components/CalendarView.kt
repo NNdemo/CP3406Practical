@@ -249,7 +249,7 @@ private fun ScheduleListItem(
                 )
                 if (schedule.isReminded) {
                     Text(
-                        text = "已完成",
+                        text = "Completed",
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.primary
                     )
@@ -294,11 +294,11 @@ private fun buildTimeRangeText(schedule: Schedule, showFullDate: Boolean, select
         }
         // 跨天的日程，当前显示是开始日期
         startDate == selectedDate -> {
-            "${schedule.startTime.format(timeFormatter)} → 次日 ${schedule.endTime.format(timeFormatter)}"
+            "${schedule.startTime.format(timeFormatter)} → Next day ${schedule.endTime.format(timeFormatter)}"
         }
         // 跨天的日程，当前显示是结束日期
         endDate == selectedDate -> {
-            "前日 ${schedule.startTime.format(timeFormatter)} → ${schedule.endTime.format(timeFormatter)}"
+            "Previous day ${schedule.startTime.format(timeFormatter)} → ${schedule.endTime.format(timeFormatter)}"
         }
         // 多天的日程
         else -> {

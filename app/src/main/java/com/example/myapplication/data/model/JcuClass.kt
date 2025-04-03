@@ -26,7 +26,7 @@ data class JcuClass(
     fun toSchedule(): Schedule {
         return Schedule(
             title = "$courseCode - $courseName",
-            description = "课程状态: ${status.description}",
+            description = "Class Status: ${status.description}",
             startTime = startTime,
             endTime = endTime,
             location = location,
@@ -63,32 +63,32 @@ data class JcuClass(
                 // 时间格式如: "1300-1430" (13:00-14:30)
                 val times = timeRange.split("-")
                 if (times.size < 2) {
-                    throw IllegalArgumentException("时间范围格式无效: $timeRange")
+                    throw IllegalArgumentException("Invalid time range format: $timeRange")
                 }
                 
                 val startTimeStr = times[0]
                 val endTimeStr = times[1]
                 
                 if (startTimeStr.length < 4 || endTimeStr.length < 4) {
-                    throw IllegalArgumentException("时间格式无效，需要至少4位数字: $timeRange")
+                    throw IllegalArgumentException("Invalid time format, at least 4 digits required: $timeRange")
                 }
                 
                 val startHour = startTimeStr.substring(0, 2).toIntOrNull() 
-                    ?: throw NumberFormatException("无法解析小时: ${startTimeStr.substring(0, 2)}")
+                    ?: throw NumberFormatException("Unable to parse hours: ${startTimeStr.substring(0, 2)}")
                     
                 val startMinute = startTimeStr.substring(2).toIntOrNull()
-                    ?: throw NumberFormatException("无法解析分钟: ${startTimeStr.substring(2)}")
+                    ?: throw NumberFormatException("Unable to parse minutes: ${startTimeStr.substring(2)}")
                     
                 val endHour = endTimeStr.substring(0, 2).toIntOrNull()
-                    ?: throw NumberFormatException("无法解析小时: ${endTimeStr.substring(0, 2)}")
+                    ?: throw NumberFormatException("Unable to parse hours: ${endTimeStr.substring(0, 2)}")
                     
                 val endMinute = endTimeStr.substring(2).toIntOrNull()
-                    ?: throw NumberFormatException("无法解析分钟: ${endTimeStr.substring(2)}")
+                    ?: throw NumberFormatException("Unable to parse minutes: ${endTimeStr.substring(2)}")
                 
                 // 验证时间范围
                 if (startHour < 0 || startHour > 23 || startMinute < 0 || startMinute > 59 ||
                     endHour < 0 || endHour > 23 || endMinute < 0 || endMinute > 59) {
-                    throw IllegalArgumentException("时间值超出范围: $timeRange")
+                    throw IllegalArgumentException("Time values out of range: $timeRange")
                 }
                 
                 // 解析日期
@@ -96,7 +96,7 @@ data class JcuClass(
                 val parsedDate = try {
                     java.time.LocalDate.parse(date, formatter)
                 } catch (e: Exception) {
-                    throw IllegalArgumentException("无法解析日期: $date", e)
+                    throw IllegalArgumentException("Unable to parse date: $date", e)
                 }
                 
                 // 创建日期时间对象
@@ -112,7 +112,7 @@ data class JcuClass(
                 
                 return Pair(startDateTime, endDateTime)
             } catch (e: Exception) {
-                println("解析JCU日期时间失败: $dateStr, $timeRange - 错误: ${e.message}")
+                println("Failed to parse JCU date time: $dateStr, $timeRange - Error: ${e.message}")
                 
                 // 出错时返回当前时间作为默认值
                 val now = LocalDateTime.now()
@@ -126,12 +126,12 @@ data class JcuClass(
  * 课程状态枚举
  */
 enum class JcuClassStatus(val description: String) {
-    PLANNED("计划中"),
-    IN_PROGRESS("进行中"),
-    UPCOMING("即将开始"),
-    COMPLETED("已完成"),
-    ABSENT("缺勤"),
-    UNKNOWN("未知")
+    PLANNED("Planned"),
+    IN_PROGRESS("In Progress"),
+    UPCOMING("Upcoming"),
+    COMPLETED("Completed"),
+    ABSENT("Absent"),
+    UNKNOWN("Unknown")
 }
 
 /**

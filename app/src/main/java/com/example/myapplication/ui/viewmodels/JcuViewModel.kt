@@ -97,20 +97,20 @@ class JcuViewModel @Inject constructor(
             if (username.isBlank() || password.isBlank()) {
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
-                    errorMessage = "用户名和密码不能为空"
+                    errorMessage = "Username and password cannot be empty"
                 )
                 return@launch
             }
             
             try {
-                Log.d(TAG, "开始JCU登录流程，用户名: $username")
+                Log.d(TAG, "Starting JCU login process, username: $username")
                 
                 // 调用登录API
                 val result = jcuApiService.login(username, password)
                 
                 when (result) {
                     is JcuApiService.LoginResult.Success -> {
-                        Log.d(TAG, "JCU登录成功")
+                        Log.d(TAG, "JCU login successful")
                         
                         // 登录成功，保存凭证（如果需要）
                         if (saveCredentials) {
@@ -139,7 +139,7 @@ class JcuViewModel @Inject constructor(
                     }
                     is JcuApiService.LoginResult.Error -> {
                         // 登录失败
-                        Log.e(TAG, "JCU登录失败: ${result.message}")
+                        Log.e(TAG, "JCU login failed: ${result.message}")
                         _uiState.value = _uiState.value.copy(
                             isLoading = false,
                             errorMessage = result.message
@@ -148,10 +148,10 @@ class JcuViewModel @Inject constructor(
                 }
             } catch (e: Exception) {
                 // 异常处理
-                Log.e(TAG, "JCU登录过程发生异常", e)
+                Log.e(TAG, "Exception occurred during JCU login", e)
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
-                    errorMessage = "登录过程发生错误: ${e.message}"
+                    errorMessage = "Error during login: ${e.message}"
                 )
             }
         }
@@ -223,7 +223,7 @@ class JcuViewModel @Inject constructor(
                 // 异常处理
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
-                    errorMessage = "获取课程数据时发生错误: ${e.message}"
+                    errorMessage = "Error fetching class data: ${e.message}"
                 )
             }
         }
@@ -263,18 +263,18 @@ class JcuViewModel @Inject constructor(
                         }
                     } catch (e: android.database.sqlite.SQLiteConstraintException) {
                         // 课程已存在，唯一索引约束冲突
-                        Log.d(TAG, "课程已存在，跳过: ${jcuClass.courseCode} - ${jcuClass.startTime}")
+                        Log.d(TAG, "Class already exists, skipping: ${jcuClass.courseCode} - ${jcuClass.startTime}")
                         duplicateCount++
                     } catch (e: Exception) {
                         // 其他异常
-                        Log.e(TAG, "导入课程时出错: ${e.message}", e)
+                        Log.e(TAG, "Error importing class: ${e.message}", e)
                     }
                 }
             }
             
             _uiState.value = _uiState.value.copy(
                 isImporting = false,
-                lastImportResult = "成功导入${importedCount}个课程到日程表 (${duplicateCount}个已存在)"
+                lastImportResult = "Successfully imported ${importedCount} classes to schedule (${duplicateCount} already existed)"
             )
         }
     }

@@ -49,14 +49,14 @@ fun JcuScreen(
         ) {
             // 顶部应用栏
             TopAppBar(
-                title = { Text("JCU 课程管理") },
+                title = { Text("JCU Course Management") },
                 actions = {
                     IconButton(onClick = { viewModel.fetchClasses() }) {
-                        Icon(imageVector = Icons.Default.Refresh, contentDescription = "刷新")
+                        Icon(imageVector = Icons.Default.Refresh, contentDescription = "Refresh")
                     }
                     
                     IconButton(onClick = { showSettings = true }) {
-                        Icon(imageVector = Icons.Default.Settings, contentDescription = "设置")
+                        Icon(imageVector = Icons.Default.Settings, contentDescription = "Settings")
                     }
                 }
             )
@@ -87,7 +87,7 @@ fun JcuScreen(
                     item {
                         if (uiState.lastRefreshTime.isNotEmpty()) {
                             Text(
-                                text = "上次更新: ${uiState.lastRefreshTime}",
+                                text = "Last update: ${uiState.lastRefreshTime}",
                                 style = MaterialTheme.typography.bodySmall,
                                 modifier = Modifier.padding(vertical = 8.dp)
                             )
@@ -104,7 +104,7 @@ fun JcuScreen(
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
                                 Text(
-                                    text = "课程列表",
+                                    text = "Class List",
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.Bold
                                 )
@@ -113,7 +113,7 @@ fun JcuScreen(
                                     onClick = { viewModel.importClassesToSchedules() },
                                     enabled = !uiState.isImporting
                                 ) {
-                                    Text(text = "导入日程")
+                                    Text(text = "Import to Schedule")
                                 }
                             }
                         }
@@ -137,12 +137,12 @@ fun JcuScreen(
                                     if (uiState.isLoading) {
                                         CircularProgressIndicator()
                                         Spacer(modifier = Modifier.height(8.dp))
-                                        Text("正在加载课程数据...")
+                                        Text("Loading class data...")
                                     } else {
-                                        Text("暂无课程数据")
+                                        Text("No class data available")
                                         Spacer(modifier = Modifier.height(8.dp))
                                         Button(onClick = { viewModel.fetchClasses() }) {
-                                            Text("刷新")
+                                            Text("Refresh")
                                         }
                                     }
                                 }
@@ -172,7 +172,7 @@ fun JcuScreen(
                     OutlinedButton(
                         onClick = { viewModel.logout() }
                     ) {
-                        Text("退出登录")
+                        Text("Logout")
                     }
                 }
             }
@@ -229,7 +229,7 @@ fun LoginForm(
                 .padding(16.dp)
         ) {
             Text(
-                text = "JCU 学生登录",
+                text = "JCU Student Login",
                 style = MaterialTheme.typography.headlineSmall,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
@@ -240,7 +240,7 @@ fun LoginForm(
                     usernameInput = it
                     onClearError()
                 },
-                label = { Text("用户名") },
+                label = { Text("Username") },
                 singleLine = true,
                 enabled = !isLoading,
                 modifier = Modifier.fillMaxWidth()
@@ -254,7 +254,7 @@ fun LoginForm(
                     password = it
                     onClearError()
                 },
-                label = { Text("密码") },
+                label = { Text("Password") },
                 singleLine = true,
                 enabled = !isLoading,
                 visualTransformation = PasswordVisualTransformation(),
@@ -274,7 +274,7 @@ fun LoginForm(
                 )
                 
                 Text(
-                    text = "保存登录信息",
+                    text = "Save login information",
                     modifier = Modifier.clickable { saveCredentials = !saveCredentials }
                 )
             }
@@ -297,7 +297,7 @@ fun LoginForm(
                 enabled = !isLoading && usernameInput.isNotBlank() && password.isNotBlank(),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("登录")
+                Text("Login")
             }
         }
     }
@@ -316,7 +316,7 @@ fun StatisticsCard(statistics: com.example.myapplication.data.model.JcuClassStat
                 .padding(16.dp)
         ) {
             Text(
-                text = "课程统计",
+                text = "Class Statistics",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
@@ -329,25 +329,25 @@ fun StatisticsCard(statistics: com.example.myapplication.data.model.JcuClassStat
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     StatItem(
-                        title = "总课程",
+                        title = "Total",
                         value = statistics.totalClasses,
                         color = MaterialTheme.colorScheme.primary
                     )
                     
                     StatItem(
-                        title = "已完成",
+                        title = "Completed",
                         value = statistics.completedClasses,
                         color = Color.Green
                     )
                     
                     StatItem(
-                        title = "缺勤",
+                        title = "Absent",
                         value = statistics.absentClasses,
                         color = Color.Red
                     )
                     
                     StatItem(
-                        title = "计划中",
+                        title = "Planned",
                         value = statistics.plannedClasses,
                         color = Color.Gray
                     )
@@ -359,7 +359,7 @@ fun StatisticsCard(statistics: com.example.myapplication.data.model.JcuClassStat
                 if (statistics.webClassAttendanceRate > 0 || statistics.webCampusAttendanceRate > 0) {
                     Column(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = "JCU系统数据:",
+                            text = "JCU System Data:",
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Bold
                         )
@@ -374,7 +374,7 @@ fun StatisticsCard(statistics: com.example.myapplication.data.model.JcuClassStat
                                 modifier = Modifier.weight(1f)
                             ) {
                                 Text(
-                                    text = "课程出勤率",
+                                    text = "Class Attendance Rate",
                                     style = MaterialTheme.typography.bodyMedium
                                 )
                                 
@@ -409,7 +409,7 @@ fun StatisticsCard(statistics: com.example.myapplication.data.model.JcuClassStat
                                 modifier = Modifier.weight(1f)
                             ) {
                                 Text(
-                                    text = "校园出勤率",
+                                    text = "Campus Attendance Rate",
                                     style = MaterialTheme.typography.bodyMedium
                                 )
                                 
@@ -442,7 +442,7 @@ fun StatisticsCard(statistics: com.example.myapplication.data.model.JcuClassStat
                 }
             } else {
                 Text(
-                    text = "暂无统计数据",
+                    text = "No statistics data available",
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth()
@@ -524,14 +524,14 @@ fun ClassItem(jcuClass: JcuClass) {
                 Spacer(modifier = Modifier.height(4.dp))
                 
                 Text(
-                    text = "时间: ${jcuClass.startTime.format(formatter)} - ${jcuClass.endTime.format(formatter)}",
+                    text = "Time: ${jcuClass.startTime.format(formatter)} - ${jcuClass.endTime.format(formatter)}",
                     style = MaterialTheme.typography.bodySmall
                 )
                 
                 Spacer(modifier = Modifier.height(2.dp))
                 
                 Text(
-                    text = "地点: ${jcuClass.location}",
+                    text = "Location: ${jcuClass.location}",
                     style = MaterialTheme.typography.bodySmall
                 )
             }
@@ -559,12 +559,12 @@ fun SettingsDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Text(text = "JCU设置")
+            Text(text = "JCU Settings")
         },
         text = {
             Column {
                 Text(
-                    text = "设置自动刷新频率（小时）",
+                    text = "Set automatic refresh frequency (hours)",
                     style = MaterialTheme.typography.bodyMedium
                 )
                 
@@ -578,14 +578,14 @@ fun SettingsDialog(
                             intervalInput = it
                         }
                     },
-                    label = { Text("刷新间隔（小时）") },
+                    label = { Text("Refresh interval (hours)") },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
                 
                 Text(
-                    text = "设置为0禁用自动刷新",
+                    text = "Set to 0 to disable automatic refresh",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = 4.dp)
@@ -599,14 +599,14 @@ fun SettingsDialog(
                     onSave(interval)
                 }
             ) {
-                Text("保存")
+                Text("Save")
             }
         },
         dismissButton = {
             TextButton(
                 onClick = onDismiss
             ) {
-                Text("取消")
+                Text("Cancel")
             }
         }
     )

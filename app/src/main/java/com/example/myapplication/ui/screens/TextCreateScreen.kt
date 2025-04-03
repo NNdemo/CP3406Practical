@@ -76,17 +76,17 @@ fun TextCreateScreen(
     // 接受事件处理函数
     val onAccept: (Schedule) -> Unit = { schedule ->
         try {
-            println("TextCreateScreen: 接受日程 - 标题=\"${schedule.title}\"")
+            println("TextCreateScreen: Accepting schedule - Title=\"${schedule.title}\"")
             
             // 使用Dispatchers.IO替代viewModelScope
             CoroutineScope(Dispatchers.IO).launch {
-                println("TextCreateScreen: 在协程中添加日程")
+                println("TextCreateScreen: Adding schedule in coroutine")
                 scheduleViewModel.addSchedule(schedule)
-                println("TextCreateScreen: 日程添加请求已发送")
+                println("TextCreateScreen: Schedule add request sent")
                 
                 // 显示成功提示
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "正在添加日程: ${schedule.title}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Adding schedule: ${schedule.title}", Toast.LENGTH_SHORT).show()
                 }
             }
             
@@ -95,7 +95,7 @@ fun TextCreateScreen(
             
             // 如果已接受所有日程，则返回主屏幕
             if (uiState.parsedSchedules.isEmpty()) {
-                println("TextCreateScreen: 所有日程已接受，准备返回")
+                println("TextCreateScreen: All schedules accepted, preparing to return")
                 // 给用户一点时间看到Toast
                 CoroutineScope(Dispatchers.Main).launch {
                     delay(1000)
@@ -103,25 +103,25 @@ fun TextCreateScreen(
                 }
             }
         } catch (e: Exception) {
-            println("TextCreateScreen: 接受日程时出错 - ${e.message}")
+            println("TextCreateScreen: Error accepting schedule - ${e.message}")
             e.printStackTrace()
-            Toast.makeText(context, "添加失败: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Add failed: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 
     // 拒绝事件处理函数
     val onReject: (Schedule) -> Unit = { schedule ->
-        println("TextCreateScreen: 拒绝日程 - 标题=\"${schedule.title}\"")
+        println("TextCreateScreen: Rejecting schedule - Title=\"${schedule.title}\"")
         viewModel.removeParsedSchedule(schedule)
     }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("创建日程") },
+                title = { Text("Create Schedule") },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
                 actions = {
@@ -130,7 +130,7 @@ fun TextCreateScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "调试",
+                            text = "Debug",
                             style = MaterialTheme.typography.bodySmall
                         )
                         Switch(
@@ -156,8 +156,8 @@ fun TextCreateScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(150.dp),
-                label = { Text("输入文本描述") },
-                placeholder = { Text("例如：明天下午3点到5点在会议室开会讨论项目进度") }
+                label = { Text("Enter text description") },
+                placeholder = { Text("Example: Meeting in the conference room from 3pm to 5pm tomorrow to discuss project progress") }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -175,7 +175,7 @@ fun TextCreateScreen(
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(if (uiState.debugMode) "开始调试" else "解析")
+                Text(if (uiState.debugMode) "Start Debug" else "Parse")
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -184,7 +184,7 @@ fun TextCreateScreen(
             if (uiState.isLoading) {
                 CircularProgressIndicator()
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("正在解析...")
+                Text("Parsing...")
             }
 
             // 调试等待确认按钮
@@ -198,7 +198,7 @@ fun TextCreateScreen(
                         modifier = Modifier.padding(16.dp)
                     ) {
                         Text(
-                            text = "调试步骤",
+                            text = "Debug Steps",
                             style = MaterialTheme.typography.titleMedium
                         )
                         Spacer(modifier = Modifier.height(8.dp))
@@ -218,7 +218,7 @@ fun TextCreateScreen(
                             onClick = { viewModel.confirmDebugStep() },
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            Text("确认并继续")
+                            Text("Confirm and Continue")
                         }
                     }
                 }
@@ -240,7 +240,7 @@ fun TextCreateScreen(
             // 解析结果列表
             if (uiState.parsedSchedules.isNotEmpty()) {
                 Text(
-                    text = "解析结果",
+                    text = "Parsing Results",
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -264,26 +264,26 @@ fun TextCreateScreen(
                     Button(
                         onClick = {
                             try {
-                                println("批量接受 ${uiState.parsedSchedules.size} 个日程")
+                                println("Batch accepting ${uiState.parsedSchedules.size} schedules")
                                 
                                 // 使用Dispatchers.IO替代viewModelScope
                                 CoroutineScope(Dispatchers.IO).launch {
-                                    println("TextCreateScreen: 在协程中批量添加日程")
+                                    println("TextCreateScreen: Batch adding schedules in coroutine")
                                     
                                     // 批量添加所有日程
                                     uiState.parsedSchedules.forEach { schedule ->
-                                        println("添加日程: 标题=\"${schedule.title}\", 开始时间=${schedule.startTime}, 结束时间=${schedule.endTime}, 地点=${schedule.location}")
+                                        println("Adding schedule: Title=\"${schedule.title}\", Start time=${schedule.startTime}, End time=${schedule.endTime}, Location=${schedule.location}")
                                         scheduleViewModel.addSchedule(schedule)
-                                        println("日程添加请求已发送")
+                                        println("Schedule add request sent")
                                     }
                                     
                                     // 通知用户添加成功
                                     withContext(Dispatchers.Main) {
-                                        Toast.makeText(context, "正在添加 ${uiState.parsedSchedules.size} 个日程", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(context, "Adding ${uiState.parsedSchedules.size} schedules", Toast.LENGTH_SHORT).show()
                                         
                                         // 清除已解析日程并返回主屏幕
                                         viewModel.clearParsedSchedules()
-                                        println("已清除已解析日程列表")
+                                        println("Cleared parsed schedules list")
                                         
                                         // 延迟返回，给用户时间看到Toast
                                         delay(1000)
@@ -291,14 +291,14 @@ fun TextCreateScreen(
                                     }
                                 }
                             } catch (e: Exception) {
-                                println("批量添加日程时出错: ${e.message}")
+                                println("Error adding batch schedules: ${e.message}")
                                 e.printStackTrace()
-                                Toast.makeText(context, "添加失败: ${e.message}", Toast.LENGTH_LONG).show()
+                                Toast.makeText(context, "Add failed: ${e.message}", Toast.LENGTH_LONG).show()
                             }
                         },
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text("接受全部")
+                        Text("Accept All")
                     }
                 }
             }
@@ -309,11 +309,11 @@ fun TextCreateScreen(
     if (showDialog) {
         AlertDialog(
             onDismissRequest = { showDialog = false },
-            title = { Text("提示") },
+            title = { Text("Notice") },
             text = { Text(dialogText) },
             confirmButton = {
                 TextButton(onClick = { showDialog = false }) {
-                    Text("确定")
+                    Text("OK")
                 }
             }
         )
@@ -344,7 +344,7 @@ fun ExpandableSection(
             Spacer(modifier = Modifier.weight(1f))
             Icon(
                 imageVector = if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
-                contentDescription = if (expanded) "收起" else "展开",
+                contentDescription = if (expanded) "Collapse" else "Expand",
                 tint = MaterialTheme.colorScheme.primary
             )
         }
@@ -373,7 +373,7 @@ fun QuestionDialog(
                     .fillMaxWidth()
             ) {
                 Text(
-                    text = "关于此事件的问题",
+                    text = "Questions about this event",
                     style = MaterialTheme.typography.titleLarge
                 )
                 
@@ -385,8 +385,8 @@ fun QuestionDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .heightIn(min = 100.dp),
-                    placeholder = { Text("例如：能否修改时间为下午4点？") },
-                    label = { Text("您的问题") }
+                    placeholder = { Text("Example: Can I change the time to 4pm?") },
+                    label = { Text("Your question") }
                 )
                 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -396,14 +396,14 @@ fun QuestionDialog(
                     horizontalArrangement = Arrangement.End
                 ) {
                     TextButton(onClick = onDismiss) {
-                        Text("取消")
+                        Text("Cancel")
                     }
                     
                     Button(
                         onClick = onSubmit,
                         enabled = currentQuestion.isNotBlank()
                     ) {
-                        Text("提交")
+                        Text("Submit")
                     }
                 }
             }
@@ -441,33 +441,29 @@ fun ApiKeyReminderCard() {
                 ) {
                     Icon(
                         imageVector = Icons.Default.Warning,
-                        contentDescription = "警告",
+                        contentDescription = "Warning",
                         tint = MaterialTheme.colorScheme.error
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "API密钥未配置",
+                        text = "API Key Not Configured",
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.error
                     )
                 }
                 
                 Text(
-                    text = "您需要先在设置中配置${if (uiState.defaultAiModel == AiModel.CHATGPT) "ChatGPT" else "Grok"} API密钥才能获得准确的日程解析结果。否则将使用简单的本地解析，可能不够准确。",
-                    color = MaterialTheme.colorScheme.onErrorContainer
+                    text = "You need to set up an API key for AI processing. Go to Settings to configure it.",
+                    style = MaterialTheme.typography.bodyMedium
                 )
                 
-                TextButton(
-                    onClick = { 
-                        // 导航到设置页面的操作
-                        // 这里暂时使用Toast提示，实际应用中应该进行导航
-                        android.widget.Toast.makeText(context, "请点击底部导航栏的'设置'图标来配置API密钥", android.widget.Toast.LENGTH_LONG).show()
+                Button(
+                    onClick = {
+                        Toast.makeText(context, "Please go to Settings to configure API key", Toast.LENGTH_SHORT).show()
                     },
-                    colors = ButtonDefaults.textButtonColors(
-                        contentColor = MaterialTheme.colorScheme.primary
-                    )
+                    modifier = Modifier.align(Alignment.End)
                 ) {
-                    Text("前往设置")
+                    Text("I Understand")
                 }
             }
         }
