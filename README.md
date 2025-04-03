@@ -11,22 +11,55 @@ she maintains a healthy balance between studying, working, and enjoying her soci
 
 # Study Assistant - Mobile Application Presentation
 
+---
+
+
+# Major Updates
+
+## 1. JCU Student System Integration
+
+- Added JCU student account login functionality
+- Support automatic course import from StudentFirst
+- One-click import of class schedules to personal calendar
+
+## 2. AI Smart Scheduling
+
+- Integrated AI text processing capabilities
+- Support automatic schedule generation through text descriptions
+
+## 3. Feature Optimization
+
+- Removed voice input functionality
+- Optimized user interface and interaction experience
+- Improved overall system performance and stability
+
+
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <img src="./assets/Screen_recording_20250403_193337.gif" width="22%" />
+    <img src="./assets/Screenshot_20250403_200911.png" width="22%" />
+    <img src="./assets/Screen_recording_20250403_201211.gif" width="22%" />
+    <img src="./assets/Screenshot_20250403_192937.png" width="22%" />
+</div>
+
+---
+
 ## 0. Run the app
+
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
     <img src="./assets/Screenshot_20250212_171409.png" width="30%" />
     <img src="./assets/Screenshot_20250212_171359.png" width="30%" />
     <img src="./assets/Screenshot_20250212_171349.png" width="30%" />
+
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-    <img src="./assets/Screenshot_20250212_170739.png" width="30%" />
-    <img src="./assets/Screenshot_20250212_170729.png" width="30%" />
-    <img src="./assets/Screenshot_20250212_170721.png" width="30%" />
+    <img src="./assets/Screenshot_20250212_170705.png" width="22%" />
+    <img src="./assets/Screenshot_20250212_170648.png" width="22%" />
+    <img src="./assets/Screenshot_20250212_170721.png" width="22%" />
+    <img src="./assets/Screenshot_20250212_170739.png" width="22%" />
 </div>
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-    <img src="./assets/Screenshot_20250212_170705.png" width="30%" />
-    <img src="./assets/Screenshot_20250212_170648.png" width="30%" />
 </div>
 
 ## 1. Problem Statement
@@ -52,75 +85,81 @@ she maintains a healthy balance between studying, working, and enjoying her soci
 
 Our mobile application aims to help students like Lisa by providing:
 
-### 2.1 Intelligent Schedule Management
+### 2.1 JCU Integration
 
-- AI-powered schedule optimization (TODO)
-- Smart task prioritization
-- Automated reminders and notifications (TODO)
+- Secure JCU account login and session management
+- Automatic course retrieval from StudentFirst portal
+- Course attendance statistics and analysis
+- One-click import of classes to personal schedule
 
-### 2.2 Study Tracking System
+### 2.2 Intelligent Schedule Management
 
-- Real-time study session monitoring
-- Progress analytics and insights
-- Performance tracking and recommendations
+- Visual calendar interface with day/hours views
+- Smart task prioritization with category system
+- Natural language schedule creation (text to schedule)
+- Duplicate prevention system
 
-### 2.3 Voice Assistant Integration
+### 2.3 User Experience
 
-- Hands-free task management
-- Voice-controlled scheduling
-- Natural language processing for easy interaction
+- Fully localized English interface
+- Intuitive calendar navigation
+- Visual completion tracking
+- Quick schedule creation and editing
 
-## 3. Key Features
+## 3. Development Progress
 
-### 3.1 Schedule Management
+### 3.1 Recent Updates
 
-- Visual calendar interface
-- Drag-and-drop task organization
-- Conflict detection and resolution
+- **Complete UI Localization**: Translated all UI elements from Chinese to English
+- **Enhanced JCU Integration**: Improved login process and data retrieval from JCU StudentFirst
+- **Bug Fixes**:
+  - Fixed database schema version issues
+  - Addressed duplicate entry problems when importing JCU classes
+  - Resolved deprecated API usage in UI components
+- **APK Export**: Application successfully built into deployable APK
 
-### 3.2 Study Analytics
+### 3.2 Current Features
 
-- Detailed study statistics
-- Progress visualization
-- Performance insights
+- Secure JCU StudentFirst account integration
+- Course schedule import and management
+- Calendar visualization of schedules
+- Smart text-based schedule creation
+- Schedule categorization system
+- Attendance statistics visualization
 
-### 3.3 AI Assistant (TODO)
+### 3.3 In Development
 
-- Smart task suggestions
-- Schedule optimization
-- Personalized study recommendations
+- AI-powered schedule optimization
+- Voice assistant integration (Abor)
+- Advanced analytics for study patterns
 
 ## 4. Technical Implementation
 
-The application will be built using:
+The application is built using:
 
 - Kotlin for Android development
 - Jetpack Compose for modern UI
 - Room database for data persistence
-- AI integration for intelligent features (TODO)
+- Jsoup for web scraping (JCU integration)
+- AI integration for intelligent features (in progress)
 
-## 5. Expected Impact
+## 5. Future Roadmap
 
-By implementing these features, we aim to help students:
+In future releases, we plan to:
 
-- Improve time management skills
-- Reduce academic stress
-- Increase productivity
-- Maintain better work-life balance
+- ✅ Implement smarter AI-powered schedule suggestions
+- ✅ Add study session tracking features
+- ✅ Create performance insights dashboard
+- ✅ Improve natural language processing capabilities
 
-## 6. Conclusion
-
-Our mobile application, Study Assistant, is designed to address the common challenges faced by students in managing their time and tasks effectively. By leveraging AI and modern mobile technologies, we aim to provide a user-friendly and intelligent solution that helps students stay organized, focused, and balanced.
-
-## 7. References
+## 6. References
 
 - Gobena, G. A. (2024). Effects of academic stress on students' academic achievements and its implications for their future lives. Anatolian Journal of Education, 9(1), 113-130. https://doi.org/10.29333/aje.2024.918a
 - Zhang, T. (2023). A survey report on the current situation of academic stress among university students in the context of online teaching. Advances in Social Sciences, 12(7), 3678-3684. https://doi.org/10.12677/ass.2023.127503
 
-## 8. Acknowledgements
+## 7. Acknowledgements
 
-I would like to thank the following individuals for their valuable contributions to the development of Study Assistant:
+I would like to thank the following individuals for their valuable contributions to the development of this application:
 
 - Randy Zhu
-
 - bsingha27 (https://github.com/PacktPublishing/Mastering-Kotlin-for-Android)
