@@ -27,10 +27,12 @@ import com.example.myapplication.ui.screens.TextCreateScreen
 import com.example.myapplication.ui.screens.SettingsScreen
 import com.example.myapplication.ui.screens.CalendarScreen
 import com.example.myapplication.ui.screens.DashboardScreen
+import com.example.myapplication.ui.screens.JcuScreen
 import com.example.myapplication.ui.viewmodels.ScheduleViewModel
 import com.example.myapplication.ui.viewmodels.SettingsViewModel
 import com.example.myapplication.ui.viewmodels.DashboardViewModel
 import com.example.myapplication.ui.viewmodels.CalendarViewModel
+import com.example.myapplication.ui.viewmodels.JcuViewModel
 import java.time.LocalDateTime
 
 // 静态回调对象，不再需要
@@ -43,7 +45,8 @@ enum class AppScreen {
     SettingsScreen,
     VoiceCreateScreen,
     TextCreateScreen,
-    CalendarScreen
+    CalendarScreen,
+    JcuScreen
 }
 
 @Composable
@@ -57,6 +60,7 @@ fun GuideApp(
     val scheduleViewModel = viewModel<ScheduleViewModel>()
     val dashboardViewModel = viewModel<DashboardViewModel>()
     val calendarViewModel = viewModel<CalendarViewModel>()
+    val jcuViewModel = viewModel<JcuViewModel>()
     
     // 明确定义回调函数而不是直接使用lambda
     fun handleScheduleAdded(events: List<Schedule>, currentDate: LocalDateTime) {
@@ -96,7 +100,8 @@ fun GuideApp(
             println("GuideActivity: 导航到SettingsScreen")
             
             SettingsScreen(
-                viewModel = viewModel<SettingsViewModel>()
+                viewModel = settingsViewModel,
+                onNavigateToJcu = { navController.navigate(AppScreen.JcuScreen.name) }
             )
         }
         
@@ -116,6 +121,14 @@ fun GuideApp(
             
             CalendarScreen(
                 viewModel = calendarViewModel
+            )
+        }
+        
+        composable(route = AppScreen.JcuScreen.name) {
+            println("GuideActivity: 导航到JcuScreen")
+            
+            JcuScreen(
+                viewModel = jcuViewModel
             )
         }
     }

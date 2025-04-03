@@ -3,6 +3,7 @@ package com.example.myapplication.di
 import com.example.myapplication.data.ai.ChatGPTApiService
 import com.example.myapplication.data.ai.DeepSeekApiService
 import com.example.myapplication.data.ai.GrokApiService
+import com.example.myapplication.data.network.JcuApiService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -91,5 +92,11 @@ object NetworkModule {
     @Singleton
     fun provideGrokApiService(@Named("grok") retrofit: Retrofit): GrokApiService {
         return retrofit.create(GrokApiService::class.java)
+    }
+    
+    @Provides
+    @Singleton
+    fun provideJcuApiService(): JcuApiService {
+        return JcuApiService()
     }
 } 

@@ -28,6 +28,7 @@ import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Timeline
 import androidx.compose.material.icons.filled.TextSnippet
+import androidx.compose.material.icons.filled.School
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -36,6 +37,7 @@ import com.example.myapplication.ui.screens.DashboardScreen
 import com.example.myapplication.ui.screens.SettingsScreen
 import com.example.myapplication.ui.screens.TimelineScreen
 import com.example.myapplication.ui.screens.TextCreateScreen
+import com.example.myapplication.ui.screens.JcuScreen
 import com.example.myapplication.ui.theme.MyApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
@@ -48,6 +50,7 @@ import com.example.myapplication.ui.viewmodels.DashboardViewModel
 import com.example.myapplication.ui.viewmodels.CalendarViewModel
 import com.example.myapplication.ui.viewmodels.ScheduleViewModel
 import com.example.myapplication.ui.viewmodels.SettingsViewModel
+import com.example.myapplication.ui.viewmodels.JcuViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -78,13 +81,18 @@ fun AdaptiveLayout(
 ) {
     val useNavRail = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Expanded
     val showTopBar = windowSizeClass.heightSizeClass != WindowHeightSizeClass.Compact
+    
+    var showJcuScreen by remember { mutableStateOf(false) }
 
     Row(modifier = modifier.fillMaxSize()) {
         if (useNavRail) {
             NavigationRail {
                 NavigationRailItem(
-                    selected = selectedTab == 0,
-                    onClick = { onTabSelected(0) },
+                    selected = selectedTab == 0 && !showJcuScreen,
+                    onClick = { 
+                        onTabSelected(0)
+                        showJcuScreen = false
+                    },
                     icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
                     label = { Text("Home") }
                 )
@@ -107,10 +115,10 @@ fun AdaptiveLayout(
                     label = { Text("Text") }
                 )
                 NavigationRailItem(
-                    selected = selectedTab == 4,
-                    onClick = { onTabSelected(4) },
-                    icon = { Icon(Icons.Default.Settings, contentDescription = "Settings") },
-                    label = { Text("Settings") }
+                    selected = showJcuScreen,
+                    onClick = { showJcuScreen = true },
+                    icon = { Icon(Icons.Default.School, contentDescription = "JCU") },
+                    label = { Text("JCU") }
                 )
             }
         }
@@ -121,34 +129,57 @@ fun AdaptiveLayout(
                 if (!useNavRail) {
                     NavigationBar {
                         NavigationBarItem(
-                            selected = selectedTab == 0,
-                            onClick = { onTabSelected(0) },
+                            selected = selectedTab == 0 && !showJcuScreen,
+                            onClick = { 
+                                onTabSelected(0)
+                                showJcuScreen = false
+                            },
                             icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
                             label = { Text("Home") }
                         )
                         NavigationBarItem(
-                            selected = selectedTab == 1,
-                            onClick = { onTabSelected(1) },
+                            selected = selectedTab == 1 && !showJcuScreen,
+                            onClick = {
+                                onTabSelected(1)
+                                showJcuScreen = false
+                            },
                             icon = { Icon(Icons.Default.DateRange, contentDescription = "Schedule") },
                             label = { Text("Schedule") }
                         )
                         NavigationBarItem(
-                            selected = selectedTab == 2,
-                            onClick = { onTabSelected(2) },
+                            selected = selectedTab == 2 && !showJcuScreen,
+                            onClick = {
+                                onTabSelected(2) 
+                                showJcuScreen = false
+                            },
                             icon = { Icon(Icons.Default.Timeline, contentDescription = "Timeline") },
                             label = { Text("Timeline") }
                         )
                         NavigationBarItem(
-                            selected = selectedTab == 3,
-                            onClick = { onTabSelected(3) },
+                            selected = selectedTab == 3 && !showJcuScreen,
+                            onClick = {
+                                onTabSelected(3)
+                                showJcuScreen = false
+                            },
                             icon = { Icon(Icons.Default.TextSnippet, contentDescription = "Text") },
                             label = { Text("Text") }
                         )
                         NavigationBarItem(
-                            selected = selectedTab == 4,
-                            onClick = { onTabSelected(4) },
-                            icon = { Icon(Icons.Default.Settings, contentDescription = "Settings") },
-                            label = { Text("Settings") }
+                            selected = (selectedTab == 4 && !showJcuScreen) || showJcuScreen,
+                            onClick = {
+                                if (selectedTab == 4 && !showJcuScreen) {
+                                    showJcuScreen = true
+                                } else {
+                                    onTabSelected(4)
+                                    showJcuScreen = false
+                                }
+                            },
+                            icon = { Icon(
+                                if (showJcuScreen) Icons.Default.School 
+                                else Icons.Default.Settings, 
+                                contentDescription = if (showJcuScreen) "JCU" else "Settings"
+                            ) },
+                            label = { Text(if (showJcuScreen) "JCU" else "Settings") }
                         )
                     }
                 }
@@ -160,24 +191,31 @@ fun AdaptiveLayout(
                     .padding(paddingValues),
                 color = MaterialTheme.colorScheme.background
             ) {
-                when (selectedTab) {
-                    0 -> DashboardScreen(
-                        viewModel = viewModel<DashboardViewModel>()
+                if (showJcuScreen) {
+                    JcuScreen(
+                        viewModel = viewModel<JcuViewModel>()
                     )
-                    1 -> CalendarScreen(
-                        viewModel = viewModel<CalendarViewModel>()
-                    )
-                    2 -> TimelineScreen(showTopBar = showTopBar)
-                    3 -> TextCreateScreen(
-                        onBackClick = {
-                            // 切换回主屏幕
-                            onTabSelected(0)
-                        },
-                        scheduleViewModel = viewModel<ScheduleViewModel>()
-                    )
-                    4 -> SettingsScreen(
-                        viewModel = viewModel<SettingsViewModel>()
-                    )
+                } else {
+                    when (selectedTab) {
+                        0 -> DashboardScreen(
+                            viewModel = viewModel<DashboardViewModel>()
+                        )
+                        1 -> CalendarScreen(
+                            viewModel = viewModel<CalendarViewModel>()
+                        )
+                        2 -> TimelineScreen(showTopBar = showTopBar)
+                        3 -> TextCreateScreen(
+                            onBackClick = {
+                                // 切换回主屏幕
+                                onTabSelected(0)
+                            },
+                            scheduleViewModel = viewModel<ScheduleViewModel>()
+                        )
+                        4 -> SettingsScreen(
+                            viewModel = viewModel<SettingsViewModel>(),
+                            onNavigateToJcu = { showJcuScreen = true }
+                        )
+                    }
                 }
             }
         }

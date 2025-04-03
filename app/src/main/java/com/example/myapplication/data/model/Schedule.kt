@@ -1,16 +1,19 @@
 package com.example.myapplication.data.model
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.example.myapplication.ui.viewmodels.EventDetail
 import com.example.myapplication.ui.viewmodels.EventStatus
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-@Entity(tableName = "schedules")
+@Entity(
+    tableName = "schedules",
+    indices = [Index(value = ["title", "location", "startTime", "endTime"], unique = true)]
+)
 data class Schedule(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val title: String,
     val description: String = "",
     val startTime: LocalDateTime,
@@ -47,7 +50,7 @@ data class Schedule(
 }
 
 enum class ScheduleCategory {
-    STUDY, EXAM, HOMEWORK, MEETING, CLASS, OTHER
+    STUDY, WORK, ENTERTAINMENT, MEETING, OTHER
 }
 
 enum class SchedulePriority {

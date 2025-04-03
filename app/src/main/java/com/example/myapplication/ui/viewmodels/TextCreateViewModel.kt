@@ -703,10 +703,12 @@ class TextCreateViewModel @Inject constructor(
         val lowerText = text.lowercase()
         return when {
             lowerText.contains("学习") || lowerText.contains("复习") || lowerText.contains("study") -> ScheduleCategory.STUDY
-            lowerText.contains("考试") || lowerText.contains("测试") || lowerText.contains("exam") -> ScheduleCategory.EXAM
-            lowerText.contains("作业") || lowerText.contains("作业") || lowerText.contains("homework") -> ScheduleCategory.HOMEWORK
+            lowerText.contains("考试") || lowerText.contains("测试") || lowerText.contains("exam") -> ScheduleCategory.STUDY
+            lowerText.contains("作业") || lowerText.contains("作业") || lowerText.contains("homework") -> ScheduleCategory.STUDY
             lowerText.contains("会议") || lowerText.contains("讨论") || lowerText.contains("meeting") -> ScheduleCategory.MEETING
-            lowerText.contains("课") || lowerText.contains("class") || lowerText.contains("lecture") -> ScheduleCategory.CLASS
+            lowerText.contains("课") || lowerText.contains("class") || lowerText.contains("lecture") -> ScheduleCategory.STUDY
+            lowerText.contains("工作") || lowerText.contains("work") -> ScheduleCategory.WORK
+            lowerText.contains("娱乐") || lowerText.contains("休闲") || lowerText.contains("entertainment") -> ScheduleCategory.ENTERTAINMENT
             else -> ScheduleCategory.OTHER
         }
     }

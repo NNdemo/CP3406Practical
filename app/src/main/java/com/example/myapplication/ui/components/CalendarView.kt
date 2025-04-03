@@ -185,10 +185,9 @@ private fun ScheduleListItem(
 
     val backgroundColor = when(schedule.category) {
         ScheduleCategory.STUDY -> MaterialTheme.colorScheme.primary.copy(alpha = 0.85f)
-        ScheduleCategory.EXAM -> MaterialTheme.colorScheme.error.copy(alpha = 0.85f)
-        ScheduleCategory.HOMEWORK -> MaterialTheme.colorScheme.tertiary.copy(alpha = 0.85f)
+        ScheduleCategory.WORK -> MaterialTheme.colorScheme.error.copy(alpha = 0.85f)
+        ScheduleCategory.ENTERTAINMENT -> MaterialTheme.colorScheme.tertiary.copy(alpha = 0.85f)
         ScheduleCategory.MEETING -> MaterialTheme.colorScheme.secondary.copy(alpha = 0.85f)
-        ScheduleCategory.CLASS -> Color(0xFF2196F3).copy(alpha = 0.85f)
         ScheduleCategory.OTHER -> Color(0xFF607D8B).copy(alpha = 0.85f)
     }.let { baseColor ->
         when(schedule.priority) {

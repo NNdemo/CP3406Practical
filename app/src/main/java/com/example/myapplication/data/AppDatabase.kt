@@ -5,22 +5,32 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.myapplication.data.dao.JcuClassDao
 import com.example.myapplication.data.dao.ScheduleDao
 import com.example.myapplication.data.dao.StudySessionDao
 import com.example.myapplication.data.dao.TaskDao
+import com.example.myapplication.data.model.JcuClass
 import com.example.myapplication.data.model.Schedule
 import com.example.myapplication.data.model.StudySession
 import com.example.myapplication.data.model.Task
 import com.example.myapplication.data.util.Converters
 
 @Database(
-    entities = [Schedule::class],
-    version = 1,
+    entities = [
+        Schedule::class,
+        Task::class,
+        StudySession::class,
+        JcuClass::class
+    ],
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun scheduleDao(): ScheduleDao
+    abstract fun taskDao(): TaskDao
+    abstract fun studySessionDao(): StudySessionDao
+    abstract fun jcuClassDao(): JcuClassDao
 
     companion object {
         @Volatile

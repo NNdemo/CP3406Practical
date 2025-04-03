@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import com.example.myapplication.data.AppDatabase
 import com.example.myapplication.data.dao.ScheduleDao
+import com.example.myapplication.data.dao.TaskDao
+import com.example.myapplication.data.dao.StudySessionDao
+import com.example.myapplication.data.dao.JcuClassDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,19 +20,27 @@ object DatabaseModule {
     
     @Provides
     @Singleton
-    fun provideAppDatabase(
-        @ApplicationContext context: Context
-    ): AppDatabase {
-        return Room.databaseBuilder(
-            context,
-            AppDatabase::class.java,
-            "study_time_db"
-        ).build()
+    fun provideDatabase(@ApplicationContext appContext: Context): AppDatabase {
+        return AppDatabase.getDatabase(appContext)
     }
-
+    
     @Provides
-    @Singleton
     fun provideScheduleDao(database: AppDatabase): ScheduleDao {
         return database.scheduleDao()
+    }
+    
+    @Provides
+    fun provideTaskDao(database: AppDatabase): TaskDao {
+        return database.taskDao()
+    }
+    
+    @Provides
+    fun provideStudySessionDao(database: AppDatabase): StudySessionDao {
+        return database.studySessionDao()
+    }
+    
+    @Provides
+    fun provideJcuClassDao(database: AppDatabase): JcuClassDao {
+        return database.jcuClassDao()
     }
 } 
