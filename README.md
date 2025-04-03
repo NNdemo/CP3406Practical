@@ -39,6 +39,7 @@ she maintains a healthy balance between studying, working, and enjoying her soci
     <img src="./assets/Screenshot_20250403_200911.png" width="22%" />
     <img src="./assets/Screen_recording_20250403_201211.gif" width="22%" />
     <img src="./assets/Screenshot_20250403_192937.png" width="22%" />
+    <img src="./assets/Screen_recording_20250403_203238.gif" width="50%" />
 </div>
 
 ---
